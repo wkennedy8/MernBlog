@@ -51,7 +51,9 @@ const ArticlePage = () => {
         </span>
       </Container>
       {comments.length < 1 ? (
-        <p>No Comments</p>
+        <Container>
+          <p className='mt-2'>No Comments</p>
+        </Container>
       ) : (
         comments.map(comment => (
           <Card key={comment._id} className='mt-2'>

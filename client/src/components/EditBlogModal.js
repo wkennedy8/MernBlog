@@ -56,6 +56,7 @@ const EditBlogModal = props => {
             <Form.Label>Body</Form.Label>
             <Form.Control
               as='textarea'
+              rows={12}
               value={formData ? formData.article : ''}
               name='article'
               onChange={handleChange}

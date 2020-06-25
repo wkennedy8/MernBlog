@@ -6,6 +6,7 @@ import AddBlog from './pages/AddBlog'
 import Navbar from './components/Navbar'
 import ArticlePage from './pages/ArticlePage'
 import Dashboard from './pages/Dashboard'
+import PrivateRoute from './components/PrivateRoute'
 
 const App = () => {
   return (
@@ -14,9 +15,9 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/add-blog' component={AddBlog} />
+          <PrivateRoute exact path='/add-blog' component={AddBlog} />
           <Route exact path='/articles/:id' component={ArticlePage} />
-          <Route exact path='/dashboard' component={Dashboard} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
         </Switch>
       </AuthProvider>
     </BrowserRouter>
