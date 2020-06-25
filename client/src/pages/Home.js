@@ -6,7 +6,7 @@ const Home = ({ history }) => {
   return (
     <Container>
       <h1 className='mt-4' style={{ textAlign: 'center' }}>
-        Mern Blog
+        Welcome to the Wyncode Blog!
       </h1>
       <ArticleList />
     </Container>

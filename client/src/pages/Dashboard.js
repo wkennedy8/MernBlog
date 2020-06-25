@@ -42,12 +42,19 @@ const Dashboard = ({ history }) => {
     <div className='mt-4'>
       <h3 style={{ textAlign: 'center' }}>Dashboard</h3>
       <Container>
-        <h4>Your Blog Posts</h4>
+        <Row className='d-flex justify-content-between'>
+          <h4>Your Blog Posts</h4>
+
+          <Button variant='success' onClick={handleAdd} className='mt-4'>
+            Add a Blog
+          </Button>
+        </Row>
+
         {articles.length < 1 ? (
           <p>You have not posted a blog.</p>
         ) : (
           articles.map(article => (
-            <Container key={article._id}>
+            <Container key={article._id} className='mt-4'>
               <Row>
                 <Col sm={8}>
                   <Card>
@@ -57,7 +64,7 @@ const Dashboard = ({ history }) => {
                   </Card>
                 </Col>
 
-                <Col xs={12} md={8}>
+                <Col xs={12} md={8} className='mt-2 mb-2'>
                   <Button
                     onClick={() => {
                       setBlogToEdit(article._id)
@@ -77,10 +84,6 @@ const Dashboard = ({ history }) => {
             </Container>
           ))
         )}
-
-        <Button variant='success' onClick={handleAdd} className='mt-4'>
-          Add a Blog
-        </Button>
       </Container>
       {blogToEdit && (
         <EditBlogModal
