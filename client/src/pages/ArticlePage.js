@@ -40,13 +40,16 @@ const ArticlePage = () => {
     <Container className='mt-4'>
       <h3>{article && article.title}</h3>
       <p>Written by: {article && article.author}</p>
-      <p>{article && article.article}</p>
+      <p style={{ whiteSpace: 'pre-line' }}>{article && article.article}</p>
       <Container
         style={{ borderBottom: '1px solid gray' }}
         className='d-flex justify-content-between'
       >
-        <h5>Comments</h5>
-        <span onClick={() => setCommentInputShow(!commentInputShow)}>
+        <h5 className='mt-4'>Comments</h5>
+        <span
+          className='mt-4'
+          onClick={() => setCommentInputShow(!commentInputShow)}
+        >
           Leave a Comment
         </span>
       </Container>
