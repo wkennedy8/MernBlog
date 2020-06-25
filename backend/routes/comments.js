@@ -13,7 +13,7 @@ router.get('/comments', async (req, res) => {
 })
 
 // Add a new comment
-router.post('/:articleId/addComment', async (req, res) => {
+router.post('/comments/:articleId/add', async (req, res) => {
   try {
     const comment = new Comments(req.body)
     const savedComment = await comment.save()

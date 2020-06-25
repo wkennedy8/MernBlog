@@ -5,7 +5,8 @@ const articleSchema = new Schema(
   {
     title: { type: String, required: true },
     article: { type: String, required: true },
-    author: { type: Schema.Types.ObjectId, ref: 'User' },
+    author: { type: String },
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
   },
   { usePushEach: true }

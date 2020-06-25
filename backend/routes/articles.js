@@ -13,10 +13,10 @@ router.get('/articles', async (req, res) => {
 })
 
 // Add a new article
-router.post('/add', auth, async (req, res) => {
+router.post('/articles/add', auth, async (req, res) => {
   const newArticle = new Articles({
     ...req.body,
-    author: req.user._id
+    owner: req.user._id
   })
 
   try {
@@ -29,7 +29,7 @@ router.post('/add', auth, async (req, res) => {
 
 // Get specific article
 
-router.get('/:id', async (req, res) => {
+router.get('/article/:id', async (req, res) => {
   await Articles.findById(req.params.id)
     .then(article => res.json(article))
     .catch(error => res.status(400).json(`Error: ${error}`))
@@ -48,7 +48,7 @@ router.patch('/update/:id', auth, async (req, res) => {
   try {
     const updatedArticle = await Articles.findOne({
       _id: req.params.id,
-      author: req.user._id
+      owner: req.user._id
     })
     if (!updatedArticle) {
       return res.status(404).send()
@@ -63,11 +63,11 @@ router.patch('/update/:id', auth, async (req, res) => {
 
 // Delete specific article
 
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/articles/:id', auth, async (req, res) => {
   try {
     const article = await Articles.findOneAndDelete({
       _id: req.params.id,
-      author: req.user._id
+      owner: req.user._id
     })
     if (!article) {
       res.status(404).json('Article not found.')
@@ -76,6 +76,14 @@ router.delete('/:id', auth, async (req, res) => {
   } catch (error) {
     res.status(400).json(`Error: ${error}`)
   }
+})
+
+// Get all articles by specific user
+
+router.get('/articles/user', auth, async (req, res) => {
+  await Articles.find({ owner: req.user._id }).then(article =>
+    res.json(article).catch(error => res.status(400).json(`Error: ${error}`))
+  )
 })
 
 module.exports = router

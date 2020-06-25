@@ -5,7 +5,7 @@ const auth = require('../middleware/auth')
 const bcrypt = require('bcryptjs')
 
 //Create a new user
-router.post('/users', async (req, res) => {
+router.post('/users/register', async (req, res) => {
   const user = new Users(req.body)
   try {
     await user.save()
@@ -17,7 +17,7 @@ router.post('/users', async (req, res) => {
 })
 
 //Login User
-router.post('/login', async (req, res) => {
+router.post('/users/login', async (req, res) => {
   try {
     const user = await Users.findByCredentials(
       req.body.email,
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
 })
 
 //Logout User
-router.post('/logout', auth, async (req, res) => {
+router.post('/users/logout', auth, async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter(token => {
       return token.token !== req.token
@@ -41,6 +41,11 @@ router.post('/logout', auth, async (req, res) => {
   } catch (error) {
     res.status(400).json(`Error: ${error}`)
   }
+})
+
+//Get current user
+router.get('/users/current', auth, async (req, res) => {
+  res.json(req.user)
 })
 
 module.exports = router

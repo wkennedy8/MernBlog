@@ -6,8 +6,7 @@ const Articles = require('./articles')
 
 const commentSchema = new Schema(
   {
-    text: { type: String, required: true },
-    date: { type: Date, default: Date.now(), required: true }
+    text: { type: String, required: true }
   },
   {
     timestamps: true
